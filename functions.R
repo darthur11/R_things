@@ -78,6 +78,29 @@ percent <- function(x, digits = 2, format = "f", ...) {
 
 
 
+##### Update statement function -----
+
+update_stmt<-function(upd,param, val){
+  if(is.na(val)){
+    upd<-paste0(upd,param,"=","NULL,")   
+  } else if(is.numeric(val)){
+    upd<-paste0(upd,param,"=",val,",")
+  } else if(is.character(val)){
+    val<-gsub("[\',\",\n]",' ',val)
+    upd<-paste0(upd,param,"=", "'",val,"',")
+  } else if(is.Date(val)){
+    upd<-paste0(upd,param,"=","'",val,"',")
+  } 
+  upd
+}
+
+---example:
+#for (col in cols) {
+#	upd_stmt<-update_stmt(upd_stmt,col,df[1,c(col)])
+#}
+#upd_stmt<-paste0(substr(upd_stmt,1,nchar(upd_stmt)-1),' where id = ',df[1,1])
+
+
 ##### SlackR using -----
 API_TOKEN <- ""
 slackr_setup(api_token = API_TOKEN)
