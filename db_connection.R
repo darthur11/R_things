@@ -1,7 +1,8 @@
 #DBs:
 library(RODBC)
 library(RMariaDB)
-library(RPostgreSQL)
+library(RPostgres)
+
 
 
 ##### Connections to different databases -----
@@ -16,7 +17,7 @@ mssql <- odbcDriverConnect(paste0('driver={SQL Server};server=',
                                credentials$mssql$password,
                                ';'))
 
-redshift <- dbConnect(dbDriver("PostgreSQL"), 
+redshift <- dbConnect(RPostgres::Postgres(), 
                     host=credentials$redshift$server,
                     port=credentials$redshift$port,
                     user=credentials$redshift$login,
