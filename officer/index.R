@@ -6,7 +6,11 @@ my_pres <- read_pptx(path = 'template.pptx')
 (tmplt_name <- layout_summary(my_pres)$master[1]) 
 valid_types<-c('body', 'title', 'ctrTitle', 'subTitle', 'dt', 'ftr', 'sldNum')
 
-
+check_template(my_pres = my_pres,
+               my_pres_layout = my_pres_layout, 
+               tmplt_name = tmplt_name,
+               valid_types = valid_types,
+               output_filename = 'output.pptx')
 
 plot_1<-ggplot(mtcars)+
   aes(x = hp, y = qsec, size = cyl)+
@@ -19,6 +23,8 @@ plot_2<-ggplot(mtcars)+
   geom_point()+
   geom_smooth()+
   theme_minimal()
+
+plot_1
 #And here we go with our presentation:  
 #Step 1, read our template:  
 my_pres <- read_pptx(path = 'template.pptx') 
